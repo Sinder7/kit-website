@@ -16,7 +16,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main.apps.MainConfig",
+    "django_ckeditor_5",
 ]
 
 MIDDLEWARE = [
@@ -52,6 +52,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "kit.urls"
+
+
+CKEDITOR_5_CONFIGS = {
+    "extends": {
+        "toolbar": [
+            ["bold", "italic", "underline", "strike"],
+            ["heading", "blockquote"],
+            ["bulletedList", "numberedList"],
+            ["link", "imageUpload"],
+            ["undo", "redo"],
+        ],
+    }
+}
 
 TEMPLATES = [
     {
@@ -112,6 +125,9 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Static files (CSS, JavaScript, Images)
