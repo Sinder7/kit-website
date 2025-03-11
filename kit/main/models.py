@@ -11,6 +11,25 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         ordering = ["title"]
+
+
+BLOCK_TYPES = [("text", "Текст"), ("image", "Изображение"), ("video", "Видео")]
+
+
+class PageBlock(models.Model):
+    page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name="blocks")
+    block_type = models.CharField(max_length=10, choices=BLOCK_TYPES)
+    content = models.TextField(blank=True)
+    order = models.PositiveBigIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order"]
+
+
+    def __str__(self):
+        return f"{self.page.title} - {self.get_block_type_display()}"
+    
+    
